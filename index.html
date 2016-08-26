@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Bootstrap Core JavaScript -->
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+  <link href="gallery.css" rel="stylesheet" type="text/css"> </link>
+
+
+</head>
+
+<body>
+<!-- Template for facebook album Gallery. -->
+<div id="gallery" class="container" ng-app="gallery-app" ng-controller="galleryCtrl">
+    <div class="row" style="margin-bottom:25px;">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Image Gallery</h2>
+        </div>
+        <div class="col-lg-12"  style="margin:25px;">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Group name or Id</span>
+            <input type="text" ng-model="inputId" class="form-control" placeholder="ex: 1999938384...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="getAlbums(inputId)">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+          <div class="alert alert-danger" role="alert" ng-show="error"> Please enter a valid page id</div>
+
+        </div>
+        <div class="col-lg-12 text-center" style="margin:25px;">
+          <p> Click on a thumbnail to see the album </p>
+        </div>
+    </div>
+    <div class="row" ng-show="thumbnailView">
+        <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3" ng-repeat="album in albums" scroll-to-item scroll-to="#gallery">
+          <div class="album">
+
+            <div class="cropped" href="#">
+              <img ng-click="viewAlbum(album.id)"  style="max-height:400px; max-width:400px" ng-src="{{album.cover_photo.images[0].source}}" ></img>
+            </div>
+            <div class="desc">
+              <h4>{{album.name}}</h4>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="!thumbnailView">
+      <div class="col-lg-12" style="padding: 30px">
+        <button type="button" class="btn btn-default" scroll-to-item scroll-to="#gallery" ng-click = "backToAlbums()"> Back to Albums </button>
+      </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3 " style="  margin-top: 50px;" ng-repeat="image in currentAlbum" data-toggle="modal" data-target=".bs-example-modal-lg">
+          <div class="album" ng-click="openModal(image.images[0].source)">
+          <div class="cropped" href="#">
+            <img  style="max-height:400px;max-width:400px" ng-src="{{image.images[0].source}}" ></img>
+          </div>
+        </div>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <img class="img-responsive" ng-src="{{modalImage}}"></img>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12" style="padding: 30px">
+          <button type="button" class="btn btn-default" scroll-to-item scroll-to="#gallery" ng-click = "backToAlbums()"> Back to Albums </button>
+        </div>
+    </div>
+</div>
+<!-- must include jQuery, bootstrap, AngularJs and app.js -->
+
+<!-- jQuery -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- angular -->
+<script src="bower_components/angular/angular.js"></script>
+
+<!-- gallery app -->
+<script src="app.js"></script>
+
+</body>
+
+</html>

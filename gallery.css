@@ -1,0 +1,29 @@
+.cropped {
+  width:275px;
+  height:200px;
+  overflow:hidden;
+}
+
+.album {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.album:hover {
+    border: 1px solid #777;
+}
+
+
+div.desc {
+    padding: 3px;
+    text-align: center;
+}
+
+
+.col-centered {
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+}
